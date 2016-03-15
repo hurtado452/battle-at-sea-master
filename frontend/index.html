@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <title>Snakes On A Boat - Multiplayer Game</title>
+        <link rel='stylesheet' href='css/main.css' type='text/css'>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        <script type="text/javascript" src="js/sprite.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                alert("Hello!");
+                if ("WebSocket" in window) {
+                    alert("We're in!");
+                    var ws = new WebSocket("ws://localhost:8080/ws");
+                    alert("Created socket");
+                    ws.send("playerName foobar");
+                    alert("Sent data");
+                    ws.onmessage = function(evt) {
+                        // This should return a bunch of data
+                        alert(evt.data);
+                    }
+                    ws.onclose = function(evt) {
+                        alert("The server closed the connection");
+                    }
+                } else {
+                    alert("Your browser does not support web sockets");
+                }
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
